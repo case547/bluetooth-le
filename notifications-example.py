@@ -13,9 +13,9 @@ def handle_data(handle, value):
 
 try:
     adapter.start()
-    device = adapter.connect('01:23:45:67:89:ab')
+    device = adapter.connect('80:6F:B0:F0:2B:95')
 
-    device.subscribe("a1e8f5b1-696b-4e4c-87c6-69dfe0b0093b",
+    device.subscribe("f000aa01-0451-4000-b000-000000000000",
                      callback=handle_data)
 
     # The subscription runs on a background thread. You must stop this main
