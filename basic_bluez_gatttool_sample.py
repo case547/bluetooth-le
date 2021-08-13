@@ -18,4 +18,4 @@ for uuid in device.discover_characteristics().keys():
         device = adapter.connect(YOUR_DEVICE_ADDRESS, address_type=ADDRESS_TYPE)
         print("Read UUID %s: %s" % (uuid, binascii.hexlify(device.char_read(uuid, timeout=10))))
     finally:
-        continue
+        pass
