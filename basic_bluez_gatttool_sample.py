@@ -9,11 +9,17 @@ adapter.start()
 device = adapter.connect(device_addr)
 
 for uuid in device.discover_characteristics().keys():
+    attempt = 1
     while True:
         try:
             print("Read UUID %s: %s" % (uuid, binascii.hexlify(device.char_read(uuid))))
         except:
             device = adapter.connect(device_addr)
+
+            if attempt >= 3:
+                break
+
+            attempt += 1
             continue
         
         break
