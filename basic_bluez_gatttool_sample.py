@@ -12,4 +12,4 @@ adapter.start()
 device = adapter.connect(YOUR_DEVICE_ADDRESS, address_type=ADDRESS_TYPE)
 
 for uuid in device.discover_characteristics().keys():
-    print("Read UUID %s: %s" % (uuid, binascii.hexlify(device.char_read(uuid))))
+    print("Read UUID %s: %s" % (uuid, binascii.hexlify(device.char_read(uuid, timeout=2))))
