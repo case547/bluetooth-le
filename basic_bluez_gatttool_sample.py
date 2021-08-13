@@ -5,7 +5,7 @@ import pygatt
 
 YOUR_DEVICE_ADDRESS = "80:6F:B0:F0:2B:95"
 # Many devices use random addressing - this is required to connect
-ADDRESS_TYPE = pygatt.BLEAddressType.random
+ADDRESS_TYPE = pygatt.BLEAddressType.public
 
 adapter = pygatt.GATTToolBackend()
 
