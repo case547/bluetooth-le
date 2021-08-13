@@ -25,7 +25,8 @@ while True:
         # solution that won't eat up unnecessary CPU, but there are many other
         # ways to handle this in more complicated program. Multi-threaded
         # programming is outside the scope of this README.
-        time.sleep(1)
+        print("Running")
+        time.sleep(5)
     finally:
         adapter.stop()
         break
