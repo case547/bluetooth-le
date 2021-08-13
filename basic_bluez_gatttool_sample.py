@@ -23,3 +23,5 @@ for uuid in device.discover_characteristics().keys():
             continue
         
         break
+
+print("Done")
