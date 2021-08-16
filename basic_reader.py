@@ -1,5 +1,6 @@
 import pygatt
 import struct
+import time
 
 adapter = pygatt.GATTToolBackend()
 
@@ -17,5 +18,6 @@ try:
         value = device.char_read(sensor_ids["lux_data"])
         struct.unpack("<f", value)
         print(value)
+        time.sleep(1)
 finally:
     adapter.stop()
