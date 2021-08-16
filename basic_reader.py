@@ -16,8 +16,7 @@ try:
     device = adapter.connect('80:6F:B0:F0:2B:95')   # target MAC address
     while True:
         value = device.char_read(sensor_ids["lux_data"])
-        struct.unpack("<f", value)
-        print(value)
+        print(struct.unpack("<f", value))
         time.sleep(1)
 finally:
     adapter.stop()
