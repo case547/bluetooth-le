@@ -19,7 +19,7 @@ try:
     adapter.start()
     device = adapter.connect('80:6F:B0:F0:2B:95')
 
-    device.subscribe("f000aa01-0451-4000-b000-000000000000",
+    device.subscribe("f000aa71-0451-4000-b000-000000000000",
                      callback=handle_data)
 
     # The subscription runs on a background thread. You must stop this main
