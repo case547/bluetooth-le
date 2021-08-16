@@ -1,5 +1,5 @@
 import pygatt
-from binascii import hexlify
+import struct
 
 adapter = pygatt.GATTToolBackend()
 
@@ -15,7 +15,7 @@ try:
     device = adapter.connect('80:6F:B0:F0:2B:95')   # target MAC address
     while True:
         value = device.char_read(sensor_ids["lux_data"])
-        # print(f"Received data: {hexlify(value)}")
+        struct.unpack("<f", value)
         print(value)
 finally:
     adapter.stop()
