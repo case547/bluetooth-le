@@ -12,10 +12,11 @@ adapter = pygatt.GATTToolBackend()
 adapter.start()
 device = adapter.connect(device_addr)
 
-num_keys = len(device.discover_characteristics().keys())
+char_keys = device.discover_characteristics().keys()
+num_keys = len(char_keys)
 logging.info(f"There are {num_keys} characteristics to read")
 
-for uuid in device.discover_characteristics().keys():
+for uuid in char_keys:
     attempt = 1
     while True:
         try:
