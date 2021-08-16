@@ -4,6 +4,7 @@ import binascii
 from os import read
 import pygatt
 import logging
+import pprint
 
 logging.basicConfig()
 logging.getLogger('pygatt').setLevel(logging.DEBUG)
@@ -48,4 +49,4 @@ for uuid in char_keys:
 
         break
 
-print(read_chars)
+pprint(read_chars)
