@@ -12,8 +12,8 @@ adapter = pygatt.GATTToolBackend()
 adapter.start()
 device = adapter.connect(device_addr)
 
-reads_left = len(device.discover_characteristics())
-logging.info(f"There are {reads_left} characteristics to read")
+# reads_left = len(device.discover_characteristics())
+# logging.info(f"There are {reads_left} characteristics to read")
 
 for uuid in device.discover_characteristics().keys():
     attempt = 1
@@ -21,14 +21,14 @@ for uuid in device.discover_characteristics().keys():
         try:
             device = adapter.connect(device_addr)
             print("Read UUID %s: %s" % (uuid, binascii.hexlify(device.char_read(uuid))))
-            reads_left -= 1
-            logging.info(f"{reads_left} characteristics left to read")
+            # reads_left -= 1
+            # logging.info(f"{reads_left} characteristics left to read")
         except:
             logging.warning(f"Attempt {attempt} failed. Trying again...")
 
             if attempt >= 3:
-                reads_left -= 1
-                logging.warning(f"Attempt {attempt} failed. Moving on... \n {reads_left} characteristics left to read")
+                # reads_left -= 1
+                logging.warning(f"Attempt {attempt} failed. Moving on... \n  characteristics left to read")
                 break
 
             attempt += 1
