@@ -4,7 +4,7 @@ import binascii
 from os import read
 import pygatt
 import logging
-import pprint
+from pprint import pprint
 
 logging.basicConfig()
 logging.getLogger('pygatt').setLevel(logging.DEBUG)
