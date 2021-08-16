@@ -1,6 +1,7 @@
 from __future__ import print_function
 
 import binascii
+from os import read
 import pygatt
 import logging
 
@@ -14,13 +15,18 @@ device = adapter.connect(device_addr)
 
 char_keys = device.discover_characteristics().keys()
 num_keys = len(char_keys)
+
+read_chars = {}
+
 logging.info(f"There are {num_keys} characteristics to read")
 
 for uuid in char_keys:
     attempt = 1
     while True:
         try:
-            print("Read UUID %s: %s" % (uuid, binascii.hexlify(device.char_read(uuid))))
+            read_char = device.char_read(uuid)
+            print("Read UUID %s: %s" % (uuid, binascii.hexlify(read_char)))
+            read_chars[uuid] = binascii.hexlify(read_char)
             num_keys -= 1
         except:
             if attempt < 3:
@@ -42,4 +48,4 @@ for uuid in char_keys:
 
         break
 
-print("Done")
+print(read_chars)
