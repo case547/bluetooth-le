@@ -6,7 +6,7 @@ import pygatt
 import logging
 
 logging.basicConfig()
-logging.getLogger('pygatt').setLevel(logging.INFO)
+logging.getLogger('pygatt').setLevel(logging.DEBUG)
 
 device_addr = "80:6F:B0:F0:2B:95"
 adapter = pygatt.GATTToolBackend()
