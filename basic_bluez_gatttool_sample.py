@@ -22,23 +22,24 @@ for uuid in char_keys:
         try:
             print("Read UUID %s: %s" % (uuid, binascii.hexlify(device.char_read(uuid))))
             num_keys -= 1
-            logging.info(f"{num_keys} characteristics left to read")
         except:
-            logging.warning(f"Attempt {attempt} failed. Trying again...")
-
-            try:
-                device = adapter.connect(device_addr)
-            except:
-                pass
-
-            if attempt >= 3:
+            if attempt < 3:
+                logging.warning(f"Attempt {attempt} failed. Trying again...")
+            else:
                 num_keys -= 1
                 logging.warning(f"Attempt {attempt} failed. Moving on... \n {num_keys} characteristics left to read")
                 break
 
+            try:
+                device = adapter.connect(device_addr)
+            except:
+                pass    
+
             attempt += 1
             continue
         
+        logging.info(f"{num_keys} characteristics left to read")
+
         break
 
 print("Done")
