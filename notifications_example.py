@@ -1,6 +1,10 @@
 import pygatt
 from binascii import hexlify
 import time
+import logging
+
+logging.basicConfig()
+logging.getLogger('pygatt').setLevel(logging.DEBUG)
 
 adapter = pygatt.GATTToolBackend()
 
