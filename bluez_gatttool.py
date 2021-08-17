@@ -5,6 +5,7 @@ from os import read
 import pygatt
 import logging
 from pprint import pprint
+import struct
 
 logging.basicConfig()
 logging.getLogger('pygatt').setLevel(logging.DEBUG)
@@ -26,7 +27,7 @@ for uuid in char_keys:
     while True:
         try:
             read_char = device.char_read(uuid)
-            print("Read UUID %s: %s" % (uuid, binascii.hexlify(read_char)))
+            print("Read UUID %s: %s" % (uuid, struct.unpack("<f", read_char)))
             read_chars[uuid] = binascii.hexlify(read_char)
             num_keys -= 1
             logging.info(f"{num_keys} characteristics left to read")
