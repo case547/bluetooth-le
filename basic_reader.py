@@ -18,6 +18,8 @@ sensor_ids = {
 try:
     adapter.start()
     device = adapter.connect('80:6F:B0:F0:2B:95')   # target MAC address
+    device.char_write("f000aa72-0451-4000-b000-000000000000", 0)
+    device.char_write("f000aa72-0451-4000-b000-000000000000", 1)
     while True:
         value = device.char_read(sensor_ids["lux_data"])
         print(struct.unpack("<f", value))
