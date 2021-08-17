@@ -29,6 +29,7 @@ for uuid in char_keys:
             print("Read UUID %s: %s" % (uuid, binascii.hexlify(read_char)))
             read_chars[uuid] = binascii.hexlify(read_char)
             num_keys -= 1
+            logging.info(f"{num_keys} characteristics left to read")
         except:
             if attempt < 3:
                 logging.warning(f"Attempt {attempt} failed. Trying again...")
@@ -44,8 +45,6 @@ for uuid in char_keys:
 
             attempt += 1
             continue
-        
-        logging.info(f"{num_keys} characteristics left to read")
 
         break
 
