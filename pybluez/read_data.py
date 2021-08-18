@@ -2,6 +2,8 @@
 
 Connects to given BLE device and fetches one of either temperature, humidity, or luxometer data.
 Invoke by: $ python3 read_data.py <MAC address> <sensor: temp/humidity/lux>
+
+Multi-Sensor MAC address: 80:6F:B0:F0:2B:95
 """
 
 import sys
@@ -9,6 +11,7 @@ from bluetooth.ble import GATTRequester
 import struct
 import time
 import signal
+
 
 sensor_ids = {
     "temp": "f000aa01-0451-4000-b000-000000000000",
