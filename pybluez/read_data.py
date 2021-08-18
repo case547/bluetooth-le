@@ -71,4 +71,4 @@ if __name__ == "__main__":
         sys.exit(1)
 
     Reader(sys.argv[1])
-    print("Done.")
+    print("\nDone.")
