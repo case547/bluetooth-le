@@ -1,10 +1,8 @@
 import sys
-
 from bluetooth.ble import GATTRequester
 
 
 class Reader:
-
     def __init__(self, address):
         self.requester = GATTRequester(address, False)
         self.connect()
@@ -17,18 +15,27 @@ class Reader:
         self.requester.connect(True)
         print("OK.")
 
-    def request_data(self):
-        data = self.requester.read_by_uuid(
+    def request_name(self):
+        name = self.requester.read_by_uuid(
             "00002a00-0000-1000-8000-00805f9b34fb")[0]
         try:
-            print("Device name:", data.decode("utf-8"))
+            print("Device name:", name.decode("utf-8"))
         except AttributeError:
-            print("Device name:", data)
+            print("Device name:", name)
+
+    def request_data(self, uuid):
+        data = self.requester.read_by_uuid(uuid)[0]
+        print("Requesting data...")
+
+        try:
+            print(f"  {data.decode('utf-8')}")
+        except AttributeError:
+            print(f"  {data}")
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage: {} <addr>".format(sys.argv[0]))
+    if len(sys.argv) < 3:
+        print(f"Usage: {sys.argv[0]} <addr> <uuid>")
         sys.exit(1)
 
     Reader(sys.argv[1])
