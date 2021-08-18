@@ -16,7 +16,7 @@ class AsyncReader(object):
         print("Connecting...", end=' ')
         sys.stdout.flush()
 
-        self.requester.connect(True)
+        self.requester.connect(True, channel_type='random')
         print("OK!")
 
     def request_data(self):
