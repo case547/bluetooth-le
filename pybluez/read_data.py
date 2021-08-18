@@ -33,18 +33,15 @@ class Reader:
             print("Device name:", name)
 
     def activate(self):
-        self.requester.write_by_uuid(
-            "f000aa02-0451-4000-b000-000000000000", b'\x01')
-        self.requester.write_by_uuid(
-            "f000aa22-0451-4000-b000-000000000000", b'\x01')
-        self.requester.write_by_uuid(
-            "f000aa72-0451-4000-b000-000000000000", b'\x01')
+        self.requester.write_by_handle(51, b'\x01')
+        self.requester.write_by_handle(62, b'\x01')
+        self.requester.write_by_handle(73, b'\x01')
 
     def request_data(self):
         print("Requesting data...")
         
         for _ in range(10):
-            data = self.requester.read_by_uuid(sensor_ids[sys.argv[2]])[0]
+            data = self.requester.read_by_uuid(sensor_ids[eval(sys.argv[2])])[0]
             print(f"  {struct.unpack('f', data)}")
             time.sleep(1)
 
