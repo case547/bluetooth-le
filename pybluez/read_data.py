@@ -57,7 +57,7 @@ class InterruptHandler:
     def got_signal(self):
         return self._signal_count > 0
 
-    def interrupt_handler(self):
+    def interrupt_handler(self, signum, frame):
         self._signal_count += 1
         if self._signal_count >= 3:
             raise KeyboardInterrupt
