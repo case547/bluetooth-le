@@ -1,12 +1,14 @@
 from gattlib import GATTRequester, GATTResponse
 import time
 
-req = GATTRequester("DB:88:84:FD:CE:20")
-response = GATTResponse()
+class NotifyStatus(GATTResponse):
+    def on_response(self, status):
+        print(f"Status: {status}")
 
-req.read_by_uuid_async("e3290004-8862-42ae-9d81-e6e9ec0f5fdf", response)
-while not response.received():
-    time.sleep(0.1)
+response = NotifyStatus()
+req = GATTRequester("e3290004-8862-42ae-9d81-e6e9ec0f5fdf")
+req.read_by_uuid_async("0x15", response)
 
-steps = response.received()[0]
-print(steps)
+while True:
+    # here, do other interesting things
+    time.sleep(1)
