@@ -1,7 +1,7 @@
 """read_data.py
 
 Connects to given BLE device and fetches one of either temperature, humidity, or luxometer data.
-Invoke by: $ python3 read_data.py <MAC address> <sensor: temp/humidity/lux>
+Invoke by: $ python3 read_data.py <MAC address> <sensor(s): temp/humidity/lux>
 
 Multi-Sensor MAC address: 80:6F:B0:F0:2B:95
 """
@@ -53,8 +53,11 @@ class Reader:
         interrupt_handler = InterruptHandler()
 
         while not interrupt_handler.got_signal:
-            data = self.requester.read_by_uuid(sensor_ids[sys.argv[2]])[0]
-            print(f"  {struct.unpack('f', data)}")
+            for arg in sys.argv[2:]:    
+                data = self.requester.read_by_uuid(sensor_ids[sys.argv[2]])[0]
+                print(f"  {arg}: {struct.unpack('f', data)}")
+            
+            print("\n")
             time.sleep(0.5)
 
 class InterruptHandler:
@@ -73,7 +76,7 @@ class InterruptHandler:
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
-        print(f"Usage: {sys.argv[0]} <addr> <sensor>")
+        print(f"Usage: {sys.argv[0]} <addr> <sensor(s)>")
         sys.exit(1)
 
     Reader(sys.argv[1])
