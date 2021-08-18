@@ -2,6 +2,7 @@ import sys
 from bluetooth.ble import GATTRequester
 import struct
 import time
+import signal
 
 sensor_ids = {
     "temp": "f000aa01-0451-4000-b000-000000000000",
@@ -40,10 +41,29 @@ class Reader:
     def request_data(self):
         print("Requesting data...")
         
-        while True:
+        interrupt_handler = InterruptHandler()
+
+        while not interrupt_handler.got_signal:
             data = self.requester.read_by_uuid(sensor_ids[sys.argv[2]])[0]
             print(f"  {struct.unpack('f', data)}")
             time.sleep(0.5)
+
+class InterruptHandler:
+    def __init__(self):
+        self._signal_count = 0
+        signal.signal(signal.SIGINT, self.interrupt_handler)
+
+    @property
+    def got_signal(self):
+        return self._signal_count > 0
+
+    def force_signal_interrupt(self):
+        self.interrupt_handler(signal.SIGINT, None)
+
+    def interrupt_handler(self, signum, frame):
+        self._signal_count += 1
+        if self._signal_count >= 3:
+            raise KeyboardInterrupt
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
