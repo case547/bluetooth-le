@@ -17,9 +17,8 @@ class Reader:
         self.requester.connect(True)
         print("OK.")
 
-    def request_data(self):
-        data = self.requester.read_by_uuid(
-            "00002a00-0000-1000-8000-00805f9b34fb")[0]
+    def request_data(self, uuid):
+        data = self.requester.read_by_uuid(uuid)[0]
         try:
             print("Device name:", data.decode("utf-8"))
         except AttributeError:
