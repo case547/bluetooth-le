@@ -6,7 +6,7 @@ class NotifyStatus(GATTResponse):
         print(f"Status: {status}")
 
 response = NotifyStatus()
-req = GATTRequester("DB:88:84:FD:CE:20", True)
+req = GATTRequester("DB:88:84:FD:CE:20")
 req.read_by_uuid_async("e3290004-8862-42ae-9d81-e6e9ec0f5fdf", response)
 
 while True:
