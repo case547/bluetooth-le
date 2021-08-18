@@ -40,10 +40,10 @@ class Reader:
     def request_data(self):
         print("Requesting data...")
         
-        for _ in range(10):
-            data = self.requester.read_by_uuid(sensor_ids[eval(sys.argv[2])])[0]
+        while True:
+            data = self.requester.read_by_uuid(sensor_ids[sys.argv[2]])[0]
             print(f"  {struct.unpack('f', data)}")
-            time.sleep(1)
+            time.sleep(0.5)
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
