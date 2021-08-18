@@ -24,13 +24,14 @@ class Reader:
             print("Device name:", name)
 
     def request_data(self):
-        data = self.requester.read_by_uuid(sys.argv[2])[0]
         print("Requesting data...")
-
-        try:
-            print(f"  {data.decode('utf-8')}")
-        except AttributeError:
-            print(f"  {data}")
+        
+        for _ in range(10):
+            data = self.requester.read_by_uuid(sys.argv[2])[0]
+            try:
+                print(f"  {data.decode('utf-8')}")
+            except AttributeError:
+                print(f"  {data}")
 
 
 if __name__ == "__main__":
