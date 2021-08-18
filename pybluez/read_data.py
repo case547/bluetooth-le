@@ -57,6 +57,7 @@ class Reader:
                 data = self.requester.read_by_uuid(sensor_ids[sys.argv[i]])[0]
                 print(f"  {sys.argv[i]}: {struct.unpack('f', data)}")
             
+            print("")
             time.sleep(0.5)
 
 class InterruptHandler:
