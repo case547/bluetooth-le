@@ -6,7 +6,7 @@ class Reader:
     def __init__(self, address):
         self.requester = GATTRequester(address, False)
         self.connect()
-        self.request_data()
+        self.request_name()
 
     def connect(self):
         print("Connecting...", end=" ")
