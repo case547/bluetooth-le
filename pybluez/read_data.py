@@ -23,8 +23,8 @@ class Reader:
         except AttributeError:
             print("Device name:", name)
 
-    def request_data(self, uuid):
-        data = self.requester.read_by_uuid(uuid)[0]
+    def request_data(self):
+        data = self.requester.read_by_uuid(sys.argv[2])[0]
         print("Requesting data...")
 
         try:
