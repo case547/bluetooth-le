@@ -1,6 +1,11 @@
 import sys
 from bluetooth.ble import GATTRequester
 
+sensor_ids = {
+    "temp_data": "f000aa01-0451-4000-b000-000000000000",
+    "humidity_data": "f000aa21-0451-4000-b000-000000000000",
+    "lux_data": "f000aa71-0451-4000-b000-000000000000",
+}
 
 class Reader:
     def __init__(self, address):
@@ -8,6 +13,7 @@ class Reader:
         self.connect()
         self.request_name()
         self.activate()
+        self.request_data()
 
     def connect(self):
         print("Connecting...", end=" ")
@@ -32,11 +38,11 @@ class Reader:
         self.requester.write_by_uuid(
             "f000aa72-0451-4000-b000-000000000000", b'\x01')
 
-    def request_data(self, uuid):
+    def request_data(self):
         print("Requesting data...")
         
         for _ in range(10):
-            data = self.requester.read_by_uuid(uuid)[0]
+            data = self.requester.read_by_uuid(sensor_ids[sys.argv[2]])[0]
             try:
                 print(f"  {data.decode('utf-8')}")
             except AttributeError:
