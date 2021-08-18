@@ -1,5 +1,7 @@
 import sys
 from bluetooth.ble import GATTRequester
+import struct
+import time
 
 sensor_ids = {
     "temp_data": "f000aa01-0451-4000-b000-000000000000",
@@ -43,15 +45,12 @@ class Reader:
         
         for _ in range(10):
             data = self.requester.read_by_uuid(sensor_ids[sys.argv[2]])[0]
-            try:
-                print(f"  {data.decode('utf-8')}")
-            except AttributeError:
-                print(f"  {data}")
-
+            print(f"  {struct.unpack('f', data)}")
+            time.sleep(1)
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
-        print(f"Usage: {sys.argv[0]} <addr> <uuid>")
+        print(f"Usage: {sys.argv[0]} <addr> <sensor>")
         sys.exit(1)
 
     Reader(sys.argv[1])
