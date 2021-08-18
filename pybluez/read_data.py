@@ -1,3 +1,9 @@
+"""read_data.py
+
+Connects to given BLE device and fetches one of either temperature, humidity, or luxometer data.
+Invoke by: $ python3 read_data.py <MAC address> <sensor: temp/humidity/lux>
+"""
+
 import sys
 from bluetooth.ble import GATTRequester
 import struct
@@ -34,9 +40,9 @@ class Reader:
             print("Device name:", name)
 
     def activate(self):
-        self.requester.write_by_handle(51, b'\x01')
-        self.requester.write_by_handle(62, b'\x01')
-        self.requester.write_by_handle(73, b'\x01')
+        self.requester.write_by_handle(51, b'\x01')     # IR temp config
+        self.requester.write_by_handle(62, b'\x01')     # humidity config
+        self.requester.write_by_handle(73, b'\x01')     # luxometer config
 
     def request_data(self):
         print("Requesting data...")
