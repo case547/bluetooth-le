@@ -1,4 +1,4 @@
-"""PyBluez simple example inquiry.py
+"""PyBluez inquiry.py
 
 Performs a simple device inquiry followed by a remote name request of each discovered device
 """
