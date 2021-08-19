@@ -5,9 +5,9 @@ import time
 from gattlib import GATTRequester, GATTResponse
 
 
-class NotifyMeYourValue(GATTResponse):
+class NotifyStatus(GATTResponse):
     def __init__(self):
-        super(NotifyMeYourValue, self).__init__()
+        super(NotifyStatus, self).__init__()
         self.done = False
 
     def on_response(self, data):
@@ -22,7 +22,7 @@ class NotifyMeYourValue(GATTResponse):
 class AsyncReader(object):
     def __init__(self, address):
         self.requester = GATTRequester(address, False)
-        self.response = NotifyMeYourValue()
+        self.response = NotifyStatus()
 
         self.connect()
         self.request_data()
@@ -36,7 +36,7 @@ class AsyncReader(object):
         print("OK!")
 
     def request_data(self):
-        self.requester.read_by_handle_async(0x1, self.response)
+        self.requester.read_by_uuid_async("e3290004-8862-42ae-9d81-e6e9ec0f5fdf", self.response)
         print("Data requested.")
 
     def loop(self):
