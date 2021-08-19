@@ -24,8 +24,10 @@ class AsyncReader(object):
     def request_data(self):
         self.requester.read_by_uuid_async(
             "e3290004-8862-42ae-9d81-e6e9ec0f5fdf", self.response)
+        print("Data requested.")
 
     def wait_response(self):
+        print("Awaiting response...")
         while not self.response.received():
             time.sleep(0.1)
 

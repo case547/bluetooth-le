@@ -37,8 +37,10 @@ class AsyncReader(object):
 
     def request_data(self):
         self.requester.read_by_handle_async(0x1, self.response)
+        print("Data requested.")
 
     def loop(self):
+        print("Awaiting response...")
         while not self.response.done:
             time.sleep(0.1)
 
