@@ -1,6 +1,7 @@
 from os import write
 from gattlib import GATTRequester, GATTResponse
 import time
+import struct
 
 req = GATTRequester("DB:88:84:FD:CE:20", False)
 response = GATTResponse()
@@ -22,7 +23,16 @@ for i in range(10):
 
     time.sleep(1)
 
-req.write_by_uuid("e3290003-8862-42ae-9d81-e6e9ec0f5fdf", b'\x00\x1a')
+now = round(time.time())
+
+param1 = struct.pack("<L", now - 15)
+param2 = struct.pack("<L", now + 15)
+param3 = b"\xff\xff\xff\xff"
+param4 = b"\x00\x00\x00\x00"
+
+req.write_by_uuid("e3290003-8862-42ae-9d81-e6e9ec0f5fdf",
+    b'\x00\x03' + param1 + param2 + param3 + param4
+)
 
 req.read_by_uuid_async("e3290002-8862-42ae-9d81-e6e9ec0f5fdf", response)
 
