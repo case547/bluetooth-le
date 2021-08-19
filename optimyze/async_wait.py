@@ -30,7 +30,7 @@ param2 = struct.pack("<L", now + 15)
 param3 = b"\xff\xff\xff\xff"
 param4 = b"\x00\x00\x00\x00"
 
-req.write_by_uuid("e3290003-8862-42ae-9d81-e6e9ec0f5fdf",
+req.write_cmd("e3290003-8862-42ae-9d81-e6e9ec0f5fdf",
     b'\x00\x03' + param1 + param2 + param3 + param4
 )
 
