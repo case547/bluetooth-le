@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import sys
 from threading import Event
 from gattlib import GATTRequester
