@@ -58,7 +58,7 @@ class Reader:
         interrupt_handler = InterruptHandler()
 
         while not interrupt_handler.got_signal:
-            for i in range(2, len(sys.argv)):
+            for i in range(1, len(sys.argv)):
                 data = self.requester.read_by_uuid(sensor_ids[sys.argv[i]])[0]
                 print(f"  {sys.argv[i]}: {struct.unpack('<f', data)[0]}")
             
