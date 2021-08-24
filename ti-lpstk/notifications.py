@@ -19,7 +19,7 @@ sensor_ids = {
 }
 
 CHARACTERISTIC_UUID = sensor_ids["lux"]
-ADDRESS = ("80:6F:B0:F0:2B:95")
+ADDRESS = "80:6F:B0:F0:2B:95"
 
 if len(sys.argv) == 3:
     ADDRESS = sys.argv[1]
