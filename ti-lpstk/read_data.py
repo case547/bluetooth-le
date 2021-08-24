@@ -7,8 +7,9 @@ or luxometer data. Invoke by:
 
 There can be 1-3 sensor args, and they can be in any order.
 
-Multi-Sensor MAC address: 80:6F:B0:F0:2B:95
 """
+
+MAC_ADDR = "80:6F:B0:F0:2B:95"
 
 import sys
 from bluetooth.ble import GATTRequester
@@ -79,9 +80,9 @@ class InterruptHandler:
             raise KeyboardInterrupt
 
 if __name__ == "__main__":
-    if len(sys.argv) < 3:
-        print(f"Usage: {sys.argv[0]} <addr> <sensor(s)>")
+    if len(sys.argv) < 2:
+        print(f"Usage: {sys.argv[0]} <sensor(s)>")
         sys.exit(1)
 
-    Reader(sys.argv[1])
+    Reader(MAC_ADDR)
     print("\nDone.")
