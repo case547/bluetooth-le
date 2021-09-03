@@ -28,7 +28,11 @@ def main(reader_obj):
     reader_obj.connect()
     reader_obj.request_name()
     reader_obj.activate()
-    reader_obj.request_data()
+
+    print("Requesting data...")
+    interrupt_handler = InterruptHandler()
+    while not interrupt_handler.got_signal:
+        reader_obj.request_data()
 
 class Reader:
     def __init__(self, address):
@@ -59,17 +63,12 @@ class Reader:
         self.requester.write_by_handle(73, b'\x01')     # luxometer config
 
     def request_data(self):
-        print("Requesting data...")
+        for i in range(1, len(sys.argv)):
+            data = self.requester.read_by_uuid(sensor_ids[sys.argv[i]])[0]
+            print(f"  {sys.argv[i]}: {struct.unpack('<f', data)[0]}")
         
-        interrupt_handler = InterruptHandler()
-
-        while not interrupt_handler.got_signal:
-            for i in range(1, len(sys.argv)):
-                data = self.requester.read_by_uuid(sensor_ids[sys.argv[i]])[0]
-                print(f"  {sys.argv[i]}: {struct.unpack('<f', data)[0]}")
-            
-            print("")
-            time.sleep(0.5)
+        print("")
+        time.sleep(0.5)
 
 class InterruptHandler:
     def __init__(self):
