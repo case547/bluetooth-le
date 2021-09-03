@@ -24,13 +24,19 @@ sensor_ids = {
     "lux": "f000aa71-0451-4000-b000-000000000000",
 }
 
+def main(reader_obj):
+    reader_obj.connect()
+    reader_obj.request_name()
+    reader_obj.activate()
+    reader_obj.request_data()
+
 class Reader:
     def __init__(self, address):
         self.requester = GATTRequester(address, False)
-        self.connect()
-        self.request_name()
-        self.activate()
-        self.request_data()
+        # self.connect()
+        # self.request_name()
+        # self.activate()
+        # self.request_data()
 
     def connect(self):
         print("Connecting...", end=" ")
@@ -84,5 +90,6 @@ if __name__ == "__main__":
         print(f"Usage: {sys.argv[0]} <sensor(s)>")
         sys.exit(1)
 
-    Reader(MAC_ADDR)
+    obj = Reader(MAC_ADDR)
+    main(obj)
     print("\nDone.")
